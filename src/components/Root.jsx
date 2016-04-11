@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Provider } from 'react-redux'
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, Route, hashHistory } from 'react-router'
 
 import App from '../containers/App.jsx'
 
@@ -12,7 +12,7 @@ export default class Root extends Component {
   render() {
     return (
       <Provider store={this.props.store}>
-        <Router history={browserHistory}>
+        <Router history={hashHistory}>
           <Route path="/" component={App}/>
         </Router>
       </Provider>
