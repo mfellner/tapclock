@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>tapclock</title>
     <% htmlWebpackPlugin.files.css.map(function(style) { %>
-    <link rel="stylesheet" href="/<%= style %>">
+    <link rel="stylesheet" href="<%= style %>">
     <% }) %>
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="favicon.ico">
 </head>
 <body>
 <main id="main"></main>
 <% htmlWebpackPlugin.files.js.map(function(script) { %>
-<script src="/<%= script %>" defer></script>
+<script src="<%= script %>" defer></script>
 <% }) %>
 </body>
 </html>
