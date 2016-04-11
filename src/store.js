@@ -19,7 +19,12 @@ export function createStore(initialState) {
 }
 
 export function getSavedState() {
-  const state = JSON.parse(localStorage.getItem(STORAGE_KEY))
+  return parseState(localStorage.getItem(STORAGE_KEY))
+}
+
+function parseState(json) {
+  const state = JSON.parse(json)
+  if (!state) return null
   state.time.records = state.time.records.map(s => new Date(s))
   return state
 }
