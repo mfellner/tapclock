@@ -12,11 +12,11 @@ nconf.env()
 
 module.exports = {
   entry: {
-    client: './src/index.jsx',
+    main: './src/index.jsx',
     vendor: Object.keys(packageJson.dependencies)
   },
   output: {
-    path: path.join(__dirname, 'dist', 'client'),
+    path: path.join(__dirname, 'dist'),
     filename: 'index.min.js'
   },
   module: {

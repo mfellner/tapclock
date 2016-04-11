@@ -5,9 +5,10 @@
   "main": "src/index.jsx",
   "scripts": {
     "build": "webpack -d",
-    "clean": "rm -r dist",
+    "clean": "rm -rf dist",
     "dist": "export NODE_ENV='production' && npm run clean && webpack -p",
     "server": "webpack-dev-server --watch --inline --no-info --history-api-fallback --content-base dist/",
+    "publish": "gh-pages -d ./dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -29,11 +30,12 @@
     "css-loader": "0.23.1",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.8.5",
+    "gh-pages": "0.11.0",
     "html-webpack-plugin": "2.15.0",
     "nconf": "0.8.4",
     "style-loader": "0.13.1",
     "webpack": "2.1.0-beta.5",
-    "webpack-dev-server": "^2.0.0-beta"
+    "webpack-dev-server": "2.0.0-beta"
   },
   "dependencies": {
     "react": "15.0.1",
@@ -42,7 +44,7 @@
     "react-router": "2.1.0",
     "redux": "3.4.0",
     "redux-storage": "4.0.0",
-    "redux-storage-decorator-filter": "^1.1.3",
+    "redux-storage-decorator-filter": "1.1.3",
     "redux-storage-engine-localstorage": "1.0.2",
     "redux-thunk": "2.0.1"
   }
