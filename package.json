@@ -1,0 +1,49 @@
+{
+  "name": "tapclock",
+  "version": "0.1.0",
+  "description": "A punchclock you can tap!",
+  "main": "src/index.jsx",
+  "scripts": {
+    "build": "webpack -d",
+    "clean": "rm -r dist",
+    "dist": "export NODE_ENV='production' && npm run clean && webpack -p",
+    "server": "webpack-dev-server --watch --inline --no-info --history-api-fallback --content-base dist/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mfellner/tapclock.git"
+  },
+  "author": "Maximilian Fellner <max.fellner@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mfellner/tapclock/issues"
+  },
+  "homepage": "https://github.com/mfellner/tapclock#readme",
+  "devDependencies": {
+    "babel-core": "6.7.6",
+    "babel-loader": "6.2.4",
+    "babel-preset-es2015-native-modules": "6.6.0",
+    "babel-preset-react": "6.5.0",
+    "babel-preset-stage-1": "6.5.0",
+    "css-loader": "0.23.1",
+    "extract-text-webpack-plugin": "1.0.1",
+    "file-loader": "0.8.5",
+    "html-webpack-plugin": "2.15.0",
+    "nconf": "0.8.4",
+    "style-loader": "0.13.1",
+    "webpack": "2.1.0-beta.5",
+    "webpack-dev-server": "^2.0.0-beta"
+  },
+  "dependencies": {
+    "react": "15.0.1",
+    "react-dom": "15.0.1",
+    "react-redux": "4.4.2",
+    "react-router": "2.1.0",
+    "redux": "3.4.0",
+    "redux-storage": "4.0.0",
+    "redux-storage-decorator-filter": "^1.1.3",
+    "redux-storage-engine-localstorage": "1.0.2",
+    "redux-thunk": "2.0.1"
+  }
+}
