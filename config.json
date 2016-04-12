@@ -1,4 +1,5 @@
 {
+  "USE_HTML5_HISTORY": false,
   "STORAGE_KEY": "tapclock.online",
   "NODE_ENV": "development"
 }

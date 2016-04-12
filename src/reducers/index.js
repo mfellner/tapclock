@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
-import time from './time'
+import records from './records'
 
 const rootReducer = combineReducers({
-  time
+  records
 })
 
 export default rootReducer

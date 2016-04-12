@@ -1,13 +1,15 @@
 import thunk from 'redux-thunk'
 import createEngine from 'redux-storage-engine-localstorage'
 import filterStorage  from 'redux-storage-decorator-filter'
+import { fromJS, Iterable } from 'immutable'
 import * as redux from 'redux'
 import * as storage from 'redux-storage'
 
 import rootReducer from './reducers'
+import { Record } from './model'
 
 const engine = filterStorage(createEngine(STORAGE_KEY), [
-  'time'
+  'records'
 ])
 
 const createStoreWithMiddleware = redux.applyMiddleware(
@@ -23,8 +25,13 @@ export function getSavedState() {
 }
 
 function parseState(json) {
-  const state = JSON.parse(json)
-  if (!state) return null
-  state.time.records = state.time.records.map(s => new Date(s))
-  return state
+  // console.log('parse state', json)
+  return fromJS(JSON.parse(json), function (key, value) {
+    // console.log(key, value, this)
+    // For redux compatibility the root object must be a plain Object.
+    if (key === '') return value.toObject()
+    if (value.has('time')) return Record.fromIterable(value)
+
+    return Iterable.isIndexed(value) ? value.toList() : value.toMap()
+  })
 }

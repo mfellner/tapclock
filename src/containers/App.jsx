@@ -1,18 +1,19 @@
 import React, { Component, PropTypes } from 'react'
+import { List } from 'immutable'
 import { connect } from 'react-redux'
 
 import { punchClock, clearClock } from '../actions/clock'
 
 function mapStateToProps(state) {
   return {
-    time: state.time
+    records: state.records
   }
 }
 
 class App extends Component {
   static propTypes = {
     route: PropTypes.object.isRequired,
-    time: PropTypes.object.isRequired,
+    records: PropTypes.instanceOf(List).isRequired,
     punchClock: PropTypes.func.isRequired,
     clearClock: PropTypes.func.isRequired
   };
@@ -29,7 +30,7 @@ class App extends Component {
   }
 
   render() {
-    const {time} = this.props
+    const {records} = this.props
     return (
       <div className="container">
         <h1>Hello, tapclock!</h1>
@@ -39,8 +40,8 @@ class App extends Component {
         </div>
         <h4>Records:</h4>
         <div>
-          {time.records.map((record, i) => (
-            <div key={i}>{record.toLocaleString()}</div>
+          {records.map((record, i) => (
+            <div key={i}>{record.time.toLocaleString()}</div>
           ))}
         </div>
       </div>

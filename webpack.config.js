@@ -36,6 +36,7 @@ module.exports = {
     new ExtractTextPlugin('styles.min.css'),
     new CommonsChunkPlugin({name: 'vendor', filename: 'vendor.min.js'}),
     new webpack.DefinePlugin({
+      'USE_HTML5_HISTORY': nconf.get('USE_HTML5_HISTORY'),
       'STORAGE_KEY': JSON.stringify(nconf.get('STORAGE_KEY')),
       'process.env.NODE_ENV': JSON.stringify(nconf.get('NODE_ENV'))
     }),
