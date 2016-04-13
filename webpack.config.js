@@ -25,7 +25,7 @@ module.exports = {
         presets: ['es2015-native-modules', 'stage-1', 'react']
       }
     }, {
-      test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader?minimize')
+      test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css?minimize&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
     }, {
       test: /\.(otf|eot|svg|ttf|woff2?)/, loader: 'file'
     }, {

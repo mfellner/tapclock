@@ -9,7 +9,7 @@ import rootReducer from './reducers'
 import { Record } from './model'
 
 const engine = filterStorage(createEngine(STORAGE_KEY), [
-  'records'
+  'clock'
 ])
 
 const createStoreWithMiddleware = redux.applyMiddleware(
@@ -28,9 +28,7 @@ function parseState(json) {
   // console.log('parse state', json)
   return fromJS(JSON.parse(json), function (key, value) {
     // console.log(key, value, this)
-    // For redux compatibility the root object must be a plain Object.
-    if (key === '') return value.toObject()
-    if (value.has('time')) return Record.fromIterable(value)
+    if (Record.isRecord(value)) return Record.fromIterable(value)
 
     return Iterable.isIndexed(value) ? value.toList() : value.toMap()
   })

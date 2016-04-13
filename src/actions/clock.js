@@ -13,9 +13,9 @@ const clearClockAction = (payload = null) => ({
   payload
 })
 
-export function punchClock() {
+export function punchClock(event) {
   return (dispatch) => {
-    dispatch(punchClockAction(new Record({time: new Date()})))
+    dispatch(punchClockAction(new Record({event, time: new Date()})))
   }
 }
 

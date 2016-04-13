@@ -1,6 +1,6 @@
 import { List } from 'immutable'
 
-import { PUNCH_CLOCK, CLEAR_CLOCK } from '../actions/clock'
+import { PUNCH_CLOCK, CLEAR_CLOCK } from '../../actions/clock'
 
 export default function records(state = List(), action) {
   switch (action.type) {

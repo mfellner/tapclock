@@ -1,9 +1,9 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux-immutable'
 
-import records from './records'
+import clock from './clock'
 
 const rootReducer = combineReducers({
-  records
+  clock
 })
 
 export default rootReducer
