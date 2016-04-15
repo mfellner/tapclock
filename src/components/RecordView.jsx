@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { Record as IRecord } from 'immutable'
+import { TimeRecord } from '../model'
 
-export default class Record extends Component {
+export default class RecordView extends Component {
   static propTypes = {
-    data: PropTypes.instanceOf(IRecord).isRequired
+    data: PropTypes.instanceOf(TimeRecord).isRequired
   };
 
   render() {
@@ -11,6 +11,7 @@ export default class Record extends Component {
       <div>
         <span>{this.props.data.event}&nbsp;</span>
         <span>{this.props.data.time.toLocaleString()}</span>
+        {this.props.children}
       </div>
     )
   }

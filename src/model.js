@@ -1,11 +1,11 @@
-import { Record as IRecord } from 'immutable'
+import { Record } from 'immutable'
 
-export class Record extends IRecord({event: null, time: null}) {
-  static isRecord(iterable) {
+export class TimeRecord extends Record({event: null, time: null}) {
+  static isTimeRecord(iterable) {
     return iterable.has('event') && iterable.has('time')
   }
 
   static fromIterable(iterable) {
-    return new Record(iterable.map((v, k) => k === 'time' ? new Date(v) : v).toObject())
+    return new TimeRecord(iterable.map((v, k) => k === 'time' ? new Date(v) : v).toObject())
   }
 }

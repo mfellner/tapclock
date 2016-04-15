@@ -1,33 +1,23 @@
 import React, { Component, PropTypes } from 'react'
 import { List } from 'immutable'
 
-import Record from './Record.jsx'
+import RecordView from './RecordView.jsx'
+import TimeView from './TimeView.jsx'
+import { TimeRecord } from '../model'
 
 export default class RecordList extends Component {
   static propTypes = {
     records: PropTypes.instanceOf(List).isRequired
   };
 
-  timeDelta(a, b) {
-    const d = new Date(Math.abs(a - b))
-    return `${d.getUTCHours()}:${d.getUTCMinutes()}:${d.getUTCSeconds()}`
-  }
-
-  duration(start, stop) {
-    if (!start || !stop) return null
-    else return (
-      <span>duration: {this.timeDelta(start.time, stop.time)}</span>
-    )
-  }
-
   render() {
+    const currentTime = new TimeRecord({time: new Date()})
     return (
       <div>
         {this.props.records.map((record, i, records) => (
-          <div key={i}>
-            <Record data={record}/>
-            {this.duration(record, records.get(i + 1))}
-          </div>
+          <RecordView key={i} data={record}>
+            <TimeView start={record} end={records.get(i + 1, currentTime)}/>
+          </RecordView>
         ))}
       </div>
     )

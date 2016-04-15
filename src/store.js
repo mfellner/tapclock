@@ -6,7 +6,7 @@ import * as redux from 'redux'
 import * as storage from 'redux-storage'
 
 import rootReducer from './reducers'
-import { Record } from './model'
+import { TimeRecord } from './model'
 
 const engine = filterStorage(createEngine(STORAGE_KEY), [
   'clock'
@@ -28,7 +28,7 @@ function parseState(json) {
   // console.log('parse state', json)
   return fromJS(JSON.parse(json), function (key, value) {
     // console.log(key, value, this)
-    if (Record.isRecord(value)) return Record.fromIterable(value)
+    if (TimeRecord.isTimeRecord(value)) return TimeRecord.fromIterable(value)
 
     return Iterable.isIndexed(value) ? value.toList() : value.toMap()
   })
