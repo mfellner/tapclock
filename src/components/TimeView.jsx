@@ -1,3 +1,4 @@
+import moment from 'moment'
 import React, { Component, PropTypes } from 'react'
 import { TimeRecord } from '../model'
 
@@ -10,7 +11,7 @@ export default class TimeView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      endTime: props.end.time
+      duration: props.end.time.diff(props.start.time)
     }
   }
 
@@ -21,7 +22,7 @@ export default class TimeView extends Component {
   componentDidMount() {
     // A TimeRecord without an event is interpreted as the current time.
     if (!this.props.end.event) {
-      this.intervals.push(setInterval(this.updateEndTime.bind(this), 1000))
+      this.intervals.push(setInterval(this.updateDuration.bind(this), 1000))
     }
   }
 
@@ -35,8 +36,8 @@ export default class TimeView extends Component {
     this.intervals.forEach(clearInterval)
   }
 
-  updateEndTime() {
-    this.setState({endTime: new Date()})
+  updateDuration() {
+    this.setState({duration: moment().diff(this.props.start.time)})
   }
 
   timeDelta(a, b) {
@@ -47,7 +48,7 @@ export default class TimeView extends Component {
   render() {
     return (
       <div>
-        <span>duration: {this.timeDelta(this.props.start.time, this.state.endTime)}</span>
+        <span>duration: {moment(this.state.duration).utc().format('HH:mm:ss')}</span>
       </div>
     )
   }

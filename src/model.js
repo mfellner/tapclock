@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { Record } from 'immutable'
 
 export class TimeRecord extends Record({event: null, time: null}) {
@@ -6,6 +7,6 @@ export class TimeRecord extends Record({event: null, time: null}) {
   }
 
   static fromIterable(iterable) {
-    return new TimeRecord(iterable.map((v, k) => k === 'time' ? new Date(v) : v).toObject())
+    return new TimeRecord(iterable.map((v, k) => k === 'time' ? moment(v) : v).toObject())
   }
 }

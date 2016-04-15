@@ -1,3 +1,4 @@
+import moment from 'moment'
 import React, { Component, PropTypes } from 'react'
 import { List } from 'immutable'
 
@@ -11,7 +12,7 @@ export default class RecordList extends Component {
   };
 
   render() {
-    const currentTime = new TimeRecord({time: new Date()})
+    const currentTime = new TimeRecord({time: moment()})
     return (
       <div>
         {this.props.records.map((record, i, records) => (

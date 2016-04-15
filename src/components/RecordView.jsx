@@ -10,7 +10,7 @@ export default class RecordView extends Component {
     return (
       <div>
         <span>{this.props.data.event}&nbsp;</span>
-        <span>{this.props.data.time.toLocaleString()}</span>
+        <span>{this.props.data.time.calendar()}</span>
         {this.props.children}
       </div>
     )

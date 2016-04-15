@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { TimeRecord } from '../model'
 
 export const PUNCH_CLOCK = Symbol('punch clock')
@@ -15,7 +16,7 @@ const clearClockAction = (payload = null) => ({
 
 export function punchClock(event) {
   return (dispatch) => {
-    dispatch(punchClockAction(new TimeRecord({event, time: new Date()})))
+    dispatch(punchClockAction(new TimeRecord({event, time: moment()})))
   }
 }
 
