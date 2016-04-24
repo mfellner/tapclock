@@ -8,17 +8,13 @@ export default class EventClock extends Component {
   static propTypes = {
     session: PropTypes.instanceOf(SessionRecord).isRequired,
     events: PropTypes.instanceOf(OrderedMap).isRequired,
-    punchClock: PropTypes.func.isRequired,
-    clearClock: PropTypes.func.isRequired
-  }
-
-  clearClock() {
-    this.props.clearClock(this.props.session._id)
+    createEvent: PropTypes.func.isRequired,
+    deleteEvent: PropTypes.func.isRequired
   }
 
   eventButton(name) {
     const currentEvent = this.props.events.last() || {}
-    return <button onClick={this.props.punchClock.bind(this, this.props.session._id, name)}
+    return <button onClick={this.props.createEvent.bind(this, this.props.session._id, name)}
                    disabled={currentEvent.name === name}>{name}</button>
   }
 
@@ -32,9 +28,8 @@ export default class EventClock extends Component {
           &nbsp;
           {this.eventButton('stop')}
           &nbsp;
-          <button onClick={this.clearClock.bind(this)}>clear</button>
         </div>
-        <EventList events={this.props.events}/>
+        <EventList events={this.props.events} deleteEvent={this.props.deleteEvent}/>
       </div>
     )
   }

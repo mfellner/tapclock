@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import { Map } from 'immutable'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
+import { Map } from 'immutable'
+
 import { createSession, deleteSession } from '../actions/sessions'
 
 function mapStateToProps(state) {
@@ -30,8 +31,8 @@ export default class SessionList extends Component {
   render() {
     return (
       <div>
-        {this.props.sessions.valueSeq().map((session, k) => (
-          <div key={k}>
+        {this.props.sessions.valueSeq().map(session => (
+          <div key={session._id}>
             <Link to={`/session/${session._id}`}>{session.name}</Link>
             &nbsp;
             <button onClick={this.deleteSession.bind(this, session._id)}>delete</button>

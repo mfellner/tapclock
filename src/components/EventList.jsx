@@ -8,7 +8,8 @@ import { EventRecord } from '../model'
 
 export default class EventList extends Component {
   static propTypes = {
-    events: PropTypes.instanceOf(OrderedMap).isRequired
+    events: PropTypes.instanceOf(OrderedMap).isRequired,
+    deleteEvent: PropTypes.func.isRequired
   }
 
   render() {
@@ -18,7 +19,7 @@ export default class EventList extends Component {
     return (
       <div>
         {eventKeys.map((key, i, keys) => (
-          <EventView key={i} event={events.get(key)}>
+          <EventView key={key} event={events.get(key)} deleteEvent={this.props.deleteEvent}>
             <EventTimeView start={events.get(key)} end={events.get(keys.get(i + 1), currentTime)}/>
           </EventView>
         ))}

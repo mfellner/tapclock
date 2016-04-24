@@ -1,13 +1,16 @@
 import { Map } from 'immutable'
 
-import { PUNCH_CLOCK, CLEAR_CLOCK } from '../actions/events'
+import { CREATE_EVENT, DELETE_EVENT } from '../actions/events'
+import { DELETE_SESSION } from '../actions/sessions'
 
 export default function events(state = Map(), action) {
   switch (action.type) {
-    case PUNCH_CLOCK:
+    case CREATE_EVENT:
       return state.set(action.payload.get('_id'), action.payload)
-    case CLEAR_CLOCK:
-      return state.filter(v => v.get('session_id') !== action.payload)
+    case DELETE_EVENT:
+      return state.delete(action.payload)
+    case DELETE_SESSION:
+      return state.filter(e => e.session_id !== action.payload)
     default:
       return state
   }
