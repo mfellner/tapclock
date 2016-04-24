@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React, { Component, PropTypes } from 'react'
-import { EventRecord, EVENT_NOW } from '../model'
+import { EventRecord } from '../model'
 
 export default class EventTimeView extends Component {
   static propTypes = {

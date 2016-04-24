@@ -19,7 +19,7 @@ export default class EventList extends Component {
       <div>
         {eventKeys.map((key, i, keys) => (
           <EventView key={i} event={events.get(key)}>
-            <EventTimeView start={events.get(key)} end={events.get(keys.get(i + i), currentTime)}/>
+            <EventTimeView start={events.get(key)} end={events.get(keys.get(i + 1), currentTime)}/>
           </EventView>
         ))}
       </div>
