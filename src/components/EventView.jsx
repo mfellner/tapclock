@@ -6,7 +6,8 @@ import { Row, Cell } from '../components/layout'
 export default class EventView extends Component {
   static propTypes = {
     event: PropTypes.instanceOf(EventRecord).isRequired,
-    deleteEvent: PropTypes.func.isRequired
+    deleteEvent: PropTypes.func.isRequired,
+    hasTerminated: PropTypes.bool.isRequired
   }
 
   deleteEvent() {
@@ -14,17 +15,20 @@ export default class EventView extends Component {
   }
 
   render() {
+    if (this.props.event.isEnd) return null
+
     return (
       <div>
         <Row>
           <Cell>{this.props.event.name}</Cell>
-          <Cell>{this.props.event.time.calendar()}</Cell>
+          <Cell>start: {this.props.event.time.calendar()}</Cell>
+          <Cell>{this.props.children}</Cell>
           <Cell>
-            <button onClick={this.deleteEvent.bind(this)}>delete</button>
+            <button onClick={this.deleteEvent.bind(this)}
+                    disabled={this.props.hasTerminated}>
+              delete
+            </button>
           </Cell>
-        </Row>
-        <Row>
-          {this.props.children}
         </Row>
       </div>
     )

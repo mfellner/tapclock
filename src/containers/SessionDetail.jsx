@@ -1,11 +1,13 @@
+import moment from 'moment'
 import React, { Component, PropTypes } from 'react'
 import { IndexLink } from 'react-router'
 import { connect } from 'react-redux'
 import { Map } from 'immutable'
 
 import EventClock from './../components/EventClock.jsx'
+import { NullEvent } from '../model'
 import { Row, Cell } from '../components/layout'
-import { createEvent, deleteEvent } from '../actions/events'
+import { createEvent, deleteEvent, endEvents } from '../actions/events'
 
 function mapStateToProps(state) {
   return {
@@ -20,7 +22,8 @@ export default class SessionDetail extends Component {
     sessions: PropTypes.instanceOf(Map).isRequired,
     events: PropTypes.instanceOf(Map).isRequired,
     createEvent: PropTypes.func.isRequired,
-    deleteEvent: PropTypes.func.isRequired
+    deleteEvent: PropTypes.func.isRequired,
+    endEvents: PropTypes.func.isRequired
   }
 
   componentWillMount() {
@@ -38,8 +41,23 @@ export default class SessionDetail extends Component {
                         .sortBy(e => e.time)
     this.setState({
       session,
-      events
+      events,
+      currentEvent: events.last() || new NullEvent()
     })
+  }
+
+  hasTerminated() {
+    return this.state.currentEvent.isEnd
+  }
+
+  sessionSummary() {
+    const start = this.state.events.first().time
+    const end = this.state.events.last().time
+    const dt = moment(end.diff(start))
+
+    return (<Row>
+      <span><b>total time:</b> {dt.utc().format('HH:mm:ss')}</span>
+    </Row>)
   }
 
   render() {
@@ -50,10 +68,13 @@ export default class SessionDetail extends Component {
             <h1>{this.state.session.name}</h1>
             <EventClock createEvent={this.props.createEvent}
                         deleteEvent={this.props.deleteEvent}
+                        endEvents={this.props.endEvents}
                         session={this.state.session}
-                        events={this.state.events}/>
+                        events={this.state.events}
+                        currentEvent={this.state.currentEvent}/>
           </Cell>
         </Row>
+        {this.hasTerminated() ? this.sessionSummary() : null}
         <Row>
           <Cell>
             <IndexLink to="/">back</IndexLink>
@@ -65,5 +86,5 @@ export default class SessionDetail extends Component {
 }
 
 export default connect(mapStateToProps, {
-  createEvent, deleteEvent
+  createEvent, deleteEvent, endEvents
 })(SessionDetail)

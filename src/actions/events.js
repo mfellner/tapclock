@@ -1,7 +1,7 @@
 import uuid from 'uuid'
 import moment from 'moment'
 import logger from '../debug'
-import { EventRecord } from '../model'
+import { EventRecord, EndEvent } from '../model'
 
 const log = logger('actions:events')
 
@@ -22,6 +22,13 @@ export function createEvent(session_id, name) {
   log('create event "%s" in session %s', name, session_id)
   return (dispatch) => {
     dispatch(createEventAction(new EventRecord({_id: uuid.v4(), session_id, name, time: moment()})))
+  }
+}
+
+export function endEvents(session_id) {
+  log('end events for session %s', session_id)
+  return (dispatch) => {
+    dispatch(createEventAction(new EndEvent(session_id)))
   }
 }
 

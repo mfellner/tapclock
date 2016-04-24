@@ -13,17 +13,41 @@ export class SessionRecord extends Record({_id: null, name: null}) {
   }
 }
 
-export class EventRecord extends Record({_id: null, session_id: null, name: null, time: null}) {
+export class EventRecord extends Record({
+  _id: null,
+  session_id: null,
+  name: null,
+  time: null,
+  isNow: false,
+  isEnd: false
+}) {
   static isType(iterable) {
-    return iterable.count() === 4
+    return iterable.count() === 6
       && iterable.has('_id')
       && iterable.has('session_id')
       && iterable.has('name')
       && iterable.has('time')
+      && iterable.has('isNow')
+      && iterable.has('isEnd')
   }
 
   static fromIterable(iterable) {
     return new EventRecord(iterable.map((v, k) => k === 'time' ? moment(v) : v).toObject())
+  }
+}
+
+export class NullEvent extends EventRecord {
+}
+
+export class NowEvent extends EventRecord {
+  constructor() {
+    super({time: moment(), isNow: true})
+  }
+}
+
+export class EndEvent extends EventRecord {
+  constructor(_id) {
+    super({_id, session_id: _id, name: 'end', time: moment(), isEnd: true})
   }
 }
 

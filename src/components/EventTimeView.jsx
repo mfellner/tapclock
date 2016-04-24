@@ -20,14 +20,13 @@ export default class EventTimeView extends Component {
   }
 
   componentDidMount() {
-    // A EventRecord without a name is interpreted as the current time.
-    if (!this.props.end.name) {
+    if (this.props.end.isNow) {
       this.intervals.push(setInterval(this.updateDuration.bind(this), 1000))
     }
   }
 
   componentWillReceiveProps(props) {
-    if (!!props.end.name) {
+    if (!props.end.isNow) {
       this.intervals.forEach(clearInterval)
     }
   }
@@ -47,9 +46,7 @@ export default class EventTimeView extends Component {
 
   render() {
     return (
-      <div>
-        <span>duration: {moment(this.state.duration).utc().format('HH:mm:ss')}</span>
-      </div>
+      <span>time: {moment(this.state.duration).utc().format('HH:mm:ss')}</span>
     )
   }
 }
