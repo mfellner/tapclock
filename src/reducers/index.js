@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux-immutable'
 
-import clock from './clock'
+import sessions from './sessions'
+import events from './events'
 
 const rootReducer = combineReducers({
-  clock
+  sessions,
+  events
 })
 
 export default rootReducer

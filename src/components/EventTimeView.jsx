@@ -1,12 +1,12 @@
 import moment from 'moment'
 import React, { Component, PropTypes } from 'react'
-import { TimeRecord } from '../model'
+import { EventRecord, EVENT_NOW } from '../model'
 
-export default class TimeView extends Component {
+export default class EventTimeView extends Component {
   static propTypes = {
-    start: PropTypes.instanceOf(TimeRecord).isRequired,
-    end: PropTypes.instanceOf(TimeRecord).isRequired
-  };
+    start: PropTypes.instanceOf(EventRecord).isRequired,
+    end: PropTypes.instanceOf(EventRecord).isRequired
+  }
 
   constructor(props) {
     super(props)
@@ -20,14 +20,14 @@ export default class TimeView extends Component {
   }
 
   componentDidMount() {
-    // A TimeRecord without an event is interpreted as the current time.
-    if (!this.props.end.event) {
+    // A EventRecord without a name is interpreted as the current time.
+    if (!this.props.end.name) {
       this.intervals.push(setInterval(this.updateDuration.bind(this), 1000))
     }
   }
 
   componentWillReceiveProps(props) {
-    if (!!props.end.event) {
+    if (!!props.end.name) {
       this.intervals.forEach(clearInterval)
     }
   }

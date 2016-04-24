@@ -5,11 +5,14 @@ import { fromJS, Iterable } from 'immutable'
 import * as redux from 'redux'
 import * as storage from 'redux-storage'
 
+import logger from './debug'
 import rootReducer from './reducers'
-import { TimeRecord } from './model'
+import { recordFromIterable } from './model'
+
+const log = logger('store')
 
 const engine = filterStorage(createEngine(STORAGE_KEY), [
-  'clock'
+  'sessions', 'events'
 ])
 
 const createStoreWithMiddleware = redux.applyMiddleware(
@@ -25,11 +28,13 @@ export function getSavedState() {
 }
 
 function parseState(json) {
-  // console.log('parse state', json)
+  log('Parse state %o', json)
   return fromJS(JSON.parse(json), function (key, value) {
-    // console.log(key, value, this)
-    if (TimeRecord.isTimeRecord(value)) return TimeRecord.fromIterable(value)
-
-    return Iterable.isIndexed(value) ? value.toList() : value.toMap()
+    try {
+      return recordFromIterable(value)
+    } catch (e) {
+      // log('No model for state %s: %o', key, value.toObject())
+      return Iterable.isIndexed(value) ? value.toList() : value.toMap()
+    }
   })
 }
