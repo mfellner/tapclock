@@ -3,6 +3,7 @@ import { Map, OrderedMap } from 'immutable'
 
 import EventList from './EventList.jsx'
 import { SessionRecord } from '../model'
+import { Row, Cell } from '../components/layout'
 
 export default class EventClock extends Component {
   static propTypes = {
@@ -21,14 +22,11 @@ export default class EventClock extends Component {
   render() {
     return (
       <div>
-        <div>
-          {this.eventButton('work')}
-          &nbsp;
-          {this.eventButton('break')}
-          &nbsp;
-          {this.eventButton('stop')}
-          &nbsp;
-        </div>
+        <Row>
+          <Cell>{this.eventButton('work')}</Cell>
+          <Cell>{this.eventButton('break')}</Cell>
+          <Cell>{this.eventButton('stop')}</Cell>
+        </Row>
         <EventList events={this.props.events} deleteEvent={this.props.deleteEvent}/>
       </div>
     )

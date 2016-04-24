@@ -13,7 +13,9 @@ nconf.env()
 module.exports = {
   entry: {
     main: './src/index.jsx',
-    vendor: Object.keys(packageJson.dependencies)
+    vendor: Object.keys(packageJson.dependencies).filter(name => [
+      'normalize.css'
+    ].indexOf(name) === -1)
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -25,7 +27,8 @@ module.exports = {
         presets: ['es2015-native-modules', 'stage-1', 'react']
       }
     }, {
-      test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css?minimize&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract('style', 'css?minimize&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
     }, {
       test: /\.(otf|eot|svg|ttf|woff2?)/, loader: 'file'
     }, {
@@ -33,7 +36,7 @@ module.exports = {
     }]
   },
   plugins: [
-    new ExtractTextPlugin('styles.min.css'),
+    new ExtractTextPlugin('styles.min.css', {allChunks: true}),
     new CommonsChunkPlugin({name: 'vendor', filename: 'vendor.min.js'}),
     new webpack.DefinePlugin({
       'USE_HTML5_HISTORY': nconf.get('USE_HTML5_HISTORY'),

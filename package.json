@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "A punchclock you can tap!",
   "main": "src/index.jsx",
+  "engines": {
+    "node": ">=5.11.0"
+  },
   "scripts": {
     "build": "webpack -d",
     "clean": "rm -rf dist",
@@ -43,6 +46,7 @@
     "moment": "2.13.0",
     "normalize.css": "4.1.1",
     "react": "15.0.1",
+    "react-css-modules": "3.7.6",
     "react-dom": "15.0.1",
     "react-redux": "4.4.5",
     "react-router": "2.3.0",

@@ -5,6 +5,7 @@ import { OrderedMap } from 'immutable'
 import EventView from './EventView.jsx'
 import EventTimeView from './EventTimeView.jsx'
 import { EventRecord } from '../model'
+import { Row, Cell } from '../components/layout'
 
 export default class EventList extends Component {
   static propTypes = {
@@ -19,9 +20,13 @@ export default class EventList extends Component {
     return (
       <div>
         {eventKeys.map((key, i, keys) => (
-          <EventView key={key} event={events.get(key)} deleteEvent={this.props.deleteEvent}>
-            <EventTimeView start={events.get(key)} end={events.get(keys.get(i + 1), currentTime)}/>
-          </EventView>
+          <Row>
+            <Cell>
+              <EventView key={key} event={events.get(key)} deleteEvent={this.props.deleteEvent}>
+                <EventTimeView start={events.get(key)} end={events.get(keys.get(i + 1), currentTime)}/>
+              </EventView>
+            </Cell>
+          </Row>
         ))}
       </div>
     )

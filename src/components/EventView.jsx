@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
+
 import { EventRecord } from '../model'
+import { Row, Cell } from '../components/layout'
 
 export default class EventView extends Component {
   static propTypes = {
@@ -14,10 +16,16 @@ export default class EventView extends Component {
   render() {
     return (
       <div>
-        <span>{this.props.event.name}&nbsp;</span>
-        <span>{this.props.event.time.calendar()}</span>
-        <button onClick={this.deleteEvent.bind(this)}>delete</button>
-        {this.props.children}
+        <Row>
+          <Cell>{this.props.event.name}</Cell>
+          <Cell>{this.props.event.time.calendar()}</Cell>
+          <Cell>
+            <button onClick={this.deleteEvent.bind(this)}>delete</button>
+          </Cell>
+        </Row>
+        <Row>
+          {this.props.children}
+        </Row>
       </div>
     )
   }

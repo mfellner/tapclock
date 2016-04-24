@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { Container } from './layout'
 
 export default class App extends Component {
   static propTypes = {
@@ -11,10 +12,10 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <h1>Tap Clock</h1>
         {this.props.children}
-      </div>
+      </Container>
     )
   }
 }

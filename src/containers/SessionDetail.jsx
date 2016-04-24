@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Map } from 'immutable'
 
 import EventClock from './../components/EventClock.jsx'
+import { Row, Cell } from '../components/layout'
 import { createEvent, deleteEvent } from '../actions/events'
 
 function mapStateToProps(state) {
@@ -44,12 +45,20 @@ export default class SessionDetail extends Component {
   render() {
     return (
       <div>
-        <h1>{this.state.session.name}</h1>
-        <EventClock createEvent={this.props.createEvent}
-                    deleteEvent={this.props.deleteEvent}
-                    session={this.state.session}
-                    events={this.state.events}/>
-        <IndexLink to="/">back</IndexLink>
+        <Row>
+          <Cell>
+            <h1>{this.state.session.name}</h1>
+            <EventClock createEvent={this.props.createEvent}
+                        deleteEvent={this.props.deleteEvent}
+                        session={this.state.session}
+                        events={this.state.events}/>
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <IndexLink to="/">back</IndexLink>
+          </Cell>
+        </Row>
       </div>
     )
   }
