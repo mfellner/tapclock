@@ -14,9 +14,10 @@ export default class EventList extends Component {
   }
 
   render() {
-    const nowEvent = new NowEvent()
     const events = this.props.events
     const eventKeys = this.props.events.keySeq()
+    const endEvent = this.props.hasTerminated ? events.last() : new NowEvent()
+
     return (
       <div>
         {eventKeys.map((key, i, keys) => (
@@ -25,7 +26,7 @@ export default class EventList extends Component {
               <EventView event={events.get(key)}
                          deleteEvent={this.props.deleteEvent}
                          hasTerminated={this.props.hasTerminated}>
-                <EventTimeView start={events.get(key)} end={events.get(keys.get(i + 1), nowEvent)}/>
+                <EventTimeView start={events.get(key)} end={events.get(keys.get(i + 1), endEvent)}/>
               </EventView>
             </Cell>
           </Row>

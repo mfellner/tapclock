@@ -1,7 +1,5 @@
-import uuid from 'uuid'
-import moment from 'moment'
 import logger from '../debug'
-import { EventRecord, EndEvent } from '../model'
+import { WorkEvent, BreakEvent, EndEvent } from '../model'
 
 const log = logger('actions:events')
 
@@ -21,14 +19,18 @@ const deleteEventAction = (payload = null) => ({
 export function createEvent(session_id, name) {
   log('create event "%s" in session %s', name, session_id)
   return (dispatch) => {
-    dispatch(createEventAction(new EventRecord({_id: uuid.v4(), session_id, name, time: moment()})))
+    // TODO: refactor
+    const event = name === 'work'
+      ? new WorkEvent({session_id, name})
+      : new BreakEvent({session_id, name})
+    dispatch(createEventAction(event))
   }
 }
 
 export function endEvents(session_id) {
   log('end events for session %s', session_id)
   return (dispatch) => {
-    dispatch(createEventAction(new EndEvent(session_id)))
+    dispatch(createEventAction(new EndEvent({session_id})))
   }
 }
 

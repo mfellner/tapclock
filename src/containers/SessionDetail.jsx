@@ -1,13 +1,16 @@
-import moment from 'moment'
 import React, { Component, PropTypes } from 'react'
 import { IndexLink } from 'react-router'
 import { connect } from 'react-redux'
 import { Map } from 'immutable'
 
+import logger from '../debug'
+import Report from '../report'
 import EventClock from './../components/EventClock.jsx'
 import { NullEvent } from '../model'
 import { Row, Cell } from '../components/layout'
 import { createEvent, deleteEvent, endEvents } from '../actions/events'
+
+const log = logger('SessionDetail')
 
 function mapStateToProps(state) {
   return {
@@ -50,14 +53,14 @@ export default class SessionDetail extends Component {
     return this.state.currentEvent.isEnd
   }
 
-  sessionSummary() {
-    const start = this.state.events.first().time
-    const end = this.state.events.last().time
-    const dt = moment(end.diff(start))
-
-    return (<Row>
-      <span><b>total time:</b> {dt.utc().format('HH:mm:ss')}</span>
-    </Row>)
+  sessionReport() {
+    const report = new Report(this.state.session, this.state.events)
+    return (
+      <Row>
+        <Cell><b>total time:</b> {report.totalTime}</Cell>
+        <Cell><b>work time:</b> {report.getCumulatedTime('WORK_EVENT','FOO')}</Cell>
+        <Cell><b>break time:</b> {report.getCumulatedTime('BREAK_EVENT')}</Cell>
+      </Row>)
   }
 
   render() {
@@ -74,7 +77,7 @@ export default class SessionDetail extends Component {
                         currentEvent={this.state.currentEvent}/>
           </Cell>
         </Row>
-        {this.hasTerminated() ? this.sessionSummary() : null}
+        {this.hasTerminated() ? this.sessionReport() : null}
         <Row>
           <Cell>
             <IndexLink to="/">back</IndexLink>

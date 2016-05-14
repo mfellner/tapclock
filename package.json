@@ -4,7 +4,7 @@
   "description": "A punchclock you can tap!",
   "main": "src/index.jsx",
   "engines": {
-    "node": ">=5.11.0"
+    "node": ">=6.1.0"
   },
   "scripts": {
     "build": "webpack -d",
