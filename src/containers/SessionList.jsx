@@ -50,6 +50,9 @@ export default class SessionList extends Component {
           <Cell>
             <button onClick={this.addSession.bind(this)}>add session</button>
           </Cell>
+          <Cell>
+            <Link to="/preferences">Preferences</Link>
+          </Cell>
         </Row>
       </div>
     )

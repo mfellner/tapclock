@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { OrderedMap } from 'immutable'
+import { Map, OrderedMap } from 'immutable'
 
 import logger from '../debug'
 import EventList from './EventList.jsx'
@@ -12,6 +12,7 @@ export default class EventClock extends Component {
   static propTypes = {
     session: PropTypes.instanceOf(SessionRecord).isRequired,
     events: PropTypes.instanceOf(OrderedMap).isRequired,
+    templates: PropTypes.instanceOf(Map).isRequired,
     currentEvent: PropTypes.instanceOf(EventRecord).isRequired,
     createEvent: PropTypes.func.isRequired,
     deleteEvent: PropTypes.func.isRequired,
@@ -22,9 +23,10 @@ export default class EventClock extends Component {
     return this.props.currentEvent.isEnd
   }
 
-  eventButton(name) {
-    return <button onClick={this.props.createEvent.bind(this, this.props.session._id, name)}
-                   disabled={this.props.currentEvent.name === name || this.hasTerminated()}>{name}</button>
+  createEventButton(template) {
+    const create = template.eventCreator(this.props.session._id)
+    return <button onClick={this.props.createEvent.bind(this, create)}
+                   disabled={this.props.currentEvent.name === name || this.hasTerminated()}>{template.name}</button>
   }
 
   endEventsButton() {
@@ -36,8 +38,9 @@ export default class EventClock extends Component {
     return (
       <div>
         <Row>
-          <Cell>{this.eventButton('work')}</Cell>
-          <Cell>{this.eventButton('break')}</Cell>
+          {this.props.templates.toIndexedSeq().map(template =>
+            <Cell key={template._id}>{this.createEventButton(template)}</Cell>
+          )}
           <Cell>{this.endEventsButton()}</Cell>
         </Row>
         <EventList events={this.props.events}

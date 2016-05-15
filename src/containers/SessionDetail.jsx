@@ -14,6 +14,7 @@ const log = logger('SessionDetail')
 
 function mapStateToProps(state) {
   return {
+    templates: state.get('templates'),
     sessions: state.get('sessions'),
     events: state.get('events')
   }
@@ -22,6 +23,7 @@ function mapStateToProps(state) {
 export default class SessionDetail extends Component {
   static propTypes = {
     routeParams: PropTypes.object.isRequired,
+    templates: PropTypes.instanceOf(Map).isRequired,
     sessions: PropTypes.instanceOf(Map).isRequired,
     events: PropTypes.instanceOf(Map).isRequired,
     createEvent: PropTypes.func.isRequired,
@@ -57,9 +59,12 @@ export default class SessionDetail extends Component {
     const report = new Report(this.state.session, this.state.events)
     return (
       <Row>
-        <Cell><b>total time:</b> {report.totalTime}</Cell>
-        <Cell><b>work time:</b> {report.getCumulatedTime('WORK_EVENT','FOO')}</Cell>
-        <Cell><b>break time:</b> {report.getCumulatedTime('BREAK_EVENT')}</Cell>
+        <Cell><b>total:</b> {report.totalTime}</Cell>
+        {this.props.templates.toIndexedSeq().map(template =>
+          <Cell key={template._id}>
+            <b>{template.name}:</b> {report.getCumulatedTime(template.custom_type)}
+          </Cell>
+        )}
       </Row>)
   }
 
@@ -72,6 +77,7 @@ export default class SessionDetail extends Component {
             <EventClock createEvent={this.props.createEvent}
                         deleteEvent={this.props.deleteEvent}
                         endEvents={this.props.endEvents}
+                        templates={this.props.templates}
                         session={this.state.session}
                         events={this.state.events}
                         currentEvent={this.state.currentEvent}/>

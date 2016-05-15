@@ -12,7 +12,7 @@ import { recordFromIterable } from './model'
 const log = logger('store')
 
 const engine = filterStorage(createEngine(STORAGE_KEY), [
-  'sessions', 'events'
+  'templates', 'sessions', 'events'
 ])
 
 const createStoreWithMiddleware = redux.applyMiddleware(
@@ -33,7 +33,7 @@ function parseState(json) {
     try {
       return recordFromIterable(value)
     } catch (e) {
-      // log('No model for state %s: %o', key, value.toObject())
+      // log('No model for state %s: %o', key, value.toObject(), e)
       return Iterable.isIndexed(value) ? value.toList() : value.toMap()
     }
   })

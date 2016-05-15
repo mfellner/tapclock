@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-ro
 
 import App from './App.jsx'
 import SessionList from '../containers/SessionList.jsx'
+import PreferencesView from './../containers/PreferencesView.jsx'
 import SessionDetail from './../containers/SessionDetail.jsx'
 
 export default class Root extends Component {
@@ -22,6 +23,7 @@ export default class Root extends Component {
         <Router history={this.history}>
           <Route path="/" component={App}>
             <IndexRoute component={SessionList}/>
+            <Route path="preferences" component={PreferencesView}/>
             <Route path="session/:id" component={SessionDetail}/>
           </Route>
         </Router>

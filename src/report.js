@@ -33,12 +33,12 @@ export default class Report {
       const beginIndex = this.events.findKey(e => e._id === beginEvent._id)
       return this.events
                  .slice(beginIndex)
-                 .find(e => !types.includes(e.type), this.events.last())
+                 .find(e => !types.includes(e.custom_type), this.events.last())
                  .get('time')
     }
 
     const dt = this.events
-                   .filter(event => types.includes(event.type))
+                   .filter(event => types.includes(event.custom_type))
                    .reduce((total, beginEvent) => {
                      const end = getEndTime(beginEvent)
                      const dt = end.diff(beginEvent.time)

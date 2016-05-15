@@ -1,5 +1,5 @@
 import logger from '../debug'
-import { WorkEvent, BreakEvent, EndEvent } from '../model'
+import { EndEvent } from '../model'
 
 const log = logger('actions:events')
 
@@ -16,13 +16,10 @@ const deleteEventAction = (payload = null) => ({
   payload
 })
 
-export function createEvent(session_id, name) {
-  log('create event "%s" in session %s', name, session_id)
+export function createEvent(create) {
+  const event = create()
+  log('create event "%s" in session %s', event.name, event.session_id)
   return (dispatch) => {
-    // TODO: refactor
-    const event = name === 'work'
-      ? new WorkEvent({session_id, name})
-      : new BreakEvent({session_id, name})
     dispatch(createEventAction(event))
   }
 }
