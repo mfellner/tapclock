@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-import { EventRecord } from '../model'
+import EventRecord from '../model/EventRecord'
 import { Row, Cell } from '../components/layout'
 
 export default class EventView extends Component {

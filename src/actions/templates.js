@@ -1,5 +1,5 @@
 import logger from '../debug'
-import { Template } from '../model'
+import Template  from '../model/Template'
 
 const log = logger('actions:templates')
 

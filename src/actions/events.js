@@ -1,5 +1,5 @@
 import logger from '../debug'
-import { EndEvent } from '../model'
+import { EndEvent } from '../model/EventRecord'
 
 const log = logger('actions:events')
 

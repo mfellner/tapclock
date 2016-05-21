@@ -28,12 +28,12 @@ export function getSavedState() {
 }
 
 function parseState(json) {
-  log('Parse state %o', json)
+  log('parse state %o', json)
   return fromJS(JSON.parse(json), function (key, value) {
     try {
       return recordFromIterable(value)
     } catch (e) {
-      // log('No model for state %s: %o', key, value.toObject(), e)
+      log('No model for state %s: %j', key, value, e)
       return Iterable.isIndexed(value) ? value.toList() : value.toMap()
     }
   })

@@ -3,7 +3,8 @@ import { Map, OrderedMap } from 'immutable'
 
 import logger from '../debug'
 import EventList from './EventList.jsx'
-import { SessionRecord, EventRecord } from '../model'
+import SessionRecord from '../model/SessionRecord'
+import EventRecord from '../model/EventRecord'
 import { Row, Cell } from '../components/layout'
 
 const log = logger('EventClock')
@@ -25,8 +26,9 @@ export default class EventClock extends Component {
 
   createEventButton(template) {
     const create = template.eventCreator(this.props.session._id)
+    const disabled = this.props.currentEvent.name === template.name || this.hasTerminated()
     return <button onClick={this.props.createEvent.bind(this, create)}
-                   disabled={this.props.currentEvent.name === name || this.hasTerminated()}>{template.name}</button>
+                   disabled={disabled}>{template.name}</button>
   }
 
   endEventsButton() {

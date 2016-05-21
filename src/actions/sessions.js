@@ -1,6 +1,6 @@
 import uuid from 'uuid'
 import logger from '../debug'
-import { SessionRecord } from '../model'
+import SessionRecord from '../model/SessionRecord'
 
 const log = logger('actions:sessions')
 

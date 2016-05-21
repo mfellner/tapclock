@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React, { Component, PropTypes } from 'react'
-import { EventRecord } from '../model'
+import EventRecord  from '../model/EventRecord'
 
 function roundSeconds(millis) {
   return Math.round(millis / 1000) * 1000
@@ -32,6 +32,7 @@ export default class EventTimeView extends Component {
   componentWillReceiveProps(props) {
     if (!props.end.isNow) {
       this.intervals.forEach(clearInterval)
+      this.updateDuration(props.end.time)
     }
   }
 
@@ -39,9 +40,11 @@ export default class EventTimeView extends Component {
     this.intervals.forEach(clearInterval)
   }
 
-  updateDuration() {
-    const dt = roundSeconds(moment().diff(this.props.start.time))
-    this.setState({duration: dt})
+  updateDuration(end = moment()) {
+    // const dt = roundSeconds(moment().diff(this.props.start.time))
+    this.setState({
+      duration: roundSeconds(end.diff(this.props.start.time))
+    })
   }
 
   timeDelta(a, b) {

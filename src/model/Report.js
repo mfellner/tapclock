@@ -1,7 +1,7 @@
 import moment from 'moment'
 import { Set } from 'immutable'
 
-import logger from './debug'
+import logger from './../debug'
 
 const log = logger('report')
 

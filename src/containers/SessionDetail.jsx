@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { Map } from 'immutable'
 
 import logger from '../debug'
-import Report from '../report'
+import Report from '../model/Report'
 import EventClock from './../components/EventClock.jsx'
-import { NullEvent } from '../model'
+import { NullEvent } from '../model/EventRecord'
 import { Row, Cell } from '../components/layout'
 import { createEvent, deleteEvent, endEvents } from '../actions/events'
 
@@ -33,6 +33,11 @@ export default class SessionDetail extends Component {
 
   componentWillMount() {
     this.setSession(this.props)
+  }
+
+  componentDidMount() {
+    log('session: %j', this.state.session)
+    log('events: %j', this.state.events)
   }
 
   componentWillReceiveProps(props) {
