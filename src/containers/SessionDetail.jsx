@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { IndexLink } from 'react-router'
 import { connect } from 'react-redux'
 import { Map } from 'immutable'
 
@@ -7,7 +6,7 @@ import logger from '../debug'
 import Report from '../model/Report'
 import EventClock from './../components/EventClock.jsx'
 import { NullEvent } from '../model/EventRecord'
-import { Row, Col } from '../components/layout'
+import { Row, Col, Button } from '../components/layout'
 import { createEvent, deleteEvent, endEvents } from '../actions/events'
 
 const log = logger('SessionDetail')
@@ -91,7 +90,7 @@ export default class SessionDetail extends Component {
         {this.hasTerminated() ? this.sessionReport() : null}
         <Row>
           <Col xs={12} sm={12}>
-            <IndexLink to="/">back</IndexLink>
+            <Button bsSize="sm" to="/">back</Button>
           </Col>
         </Row>
       </div>

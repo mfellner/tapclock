@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { IndexLink } from 'react-router'
 import { connect } from 'react-redux'
 import { Map } from 'immutable'
 
 import logger from '../debug'
-import { Row, Col } from '../components/layout'
+import { Row, Col, Button } from '../components/layout'
 import { createTemplate, deleteTemplate } from '../actions/templates'
 
 const log = logger('PreferencesView')
@@ -50,7 +49,7 @@ export default class PreferencesView extends Component {
               {template.name}
             </Col>
             <Col xs={2} sm={2}>
-              <button onClick={this.props.deleteTemplate.bind(this, template._id)}>delete</button>
+              <Button bsSize="sm" onClick={this.props.deleteTemplate.bind(this, template._id)}>delete</Button>
             </Col>
           </Row>
         )}
@@ -59,13 +58,14 @@ export default class PreferencesView extends Component {
             <input type="text"
                    value={this.state.templateName}
                    onChange={this.onTemplateNameChanged.bind(this)}/>
-            <button disabled={!this.state.templateName}
+            <Button bsSize="sm"
+                    disabled={!this.state.templateName}
                     onClick={this.onCreateTemplate.bind(this, this.state.templateName)}>
               create event template
-            </button>
+            </Button>
           </Col>
           <Col sm={4}>
-            <IndexLink to="/">back</IndexLink>
+            <Button bsSize="sm" to="/">back</Button>
           </Col>
         </Row>
       </div>

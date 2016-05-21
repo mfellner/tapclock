@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 import EventRecord from '../model/EventRecord'
-import { Row, Col } from '../components/layout'
+import { Row, Col, Button } from '../components/layout'
 
 export default class EventView extends Component {
   static propTypes = {
@@ -24,10 +24,9 @@ export default class EventView extends Component {
           <Col xs={3} sm={3}>start: {this.props.event.time.calendar()}</Col>
           <Col xs={3} sm={3}>{this.props.children}</Col>
           <Col xs={3} sm={3}>
-            <button onClick={this.deleteEvent.bind(this)}
-                    disabled={this.props.hasTerminated}>
-              delete
-            </button>
+            <Button bsSize="sm"
+                    onClick={this.deleteEvent.bind(this)}
+                    disabled={this.props.hasTerminated}>delete</Button>
           </Col>
         </Row>
       </div>

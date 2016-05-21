@@ -1,10 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import CSSModules from 'react-css-modules'
 
-import logger from '../../debug'
 import styles from './col.scss'
-
-const log = logger('layout:Col')
 
 function getStyleName(props) {
   return Object.keys(props)
@@ -28,13 +25,7 @@ class Col extends Component {
       styleName: getStyleName(props)
     }
   }
-
-  componentDidMount() {
-    if (!this.state.styleName) {
-      log('No style name set!')
-    }
-  }
-
+  
   render() {
     return (
       <div styleName={this.state.styleName}>

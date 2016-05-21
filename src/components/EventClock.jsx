@@ -5,7 +5,7 @@ import logger from '../debug'
 import EventList from './EventList.jsx'
 import SessionRecord from '../model/SessionRecord'
 import EventRecord from '../model/EventRecord'
-import { Row, Col } from '../components/layout'
+import { Row, Col, Button } from '../components/layout'
 
 const log = logger('EventClock')
 
@@ -27,13 +27,15 @@ export default class EventClock extends Component {
   createEventButton(template) {
     const create = template.eventCreator(this.props.session._id)
     const disabled = this.props.currentEvent.name === template.name || this.hasTerminated()
-    return <button onClick={this.props.createEvent.bind(this, create)}
-                   disabled={disabled}>{template.name}</button>
+    return <Button bsSize="sm"
+                   onClick={this.props.createEvent.bind(this, create)}
+                   disabled={disabled}>{template.name}</Button>
   }
 
   endEventsButton() {
-    return <button onClick={this.props.endEvents.bind(this, this.props.session._id)}
-                   disabled={this.hasTerminated()}>stop</button>
+    return <Button bsSize="sm"
+                   onClick={this.props.endEvents.bind(this, this.props.session._id)}
+                   disabled={this.hasTerminated()}>stop</Button>
   }
 
   render() {
