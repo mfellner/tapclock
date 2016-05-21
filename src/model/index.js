@@ -20,7 +20,6 @@ class NoMatchingTypeError extends Error {
 }
 
 function selectType(iterable) {
-  // log('selectType: %o %o %o', SessionRecord, EventRecord, Template)
   const Type = List.of(SessionRecord, EventRecord, Template).find(Type => {
     return Type.isType(iterable)
   })

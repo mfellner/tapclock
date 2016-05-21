@@ -7,7 +7,7 @@ import logger from '../debug'
 import Report from '../model/Report'
 import EventClock from './../components/EventClock.jsx'
 import { NullEvent } from '../model/EventRecord'
-import { Row, Cell } from '../components/layout'
+import { Row, Col } from '../components/layout'
 import { createEvent, deleteEvent, endEvents } from '../actions/events'
 
 const log = logger('SessionDetail')
@@ -64,11 +64,11 @@ export default class SessionDetail extends Component {
     const report = new Report(this.state.session, this.state.events)
     return (
       <Row>
-        <Cell><b>total:</b> {report.totalTime}</Cell>
+        <Col sm={2}><b>total:</b> {report.totalTime}</Col>
         {this.props.templates.toIndexedSeq().map(template =>
-          <Cell key={template._id}>
+          <Col sm={2} key={template._id}>
             <b>{template.name}:</b> {report.getCumulatedTime(template.custom_type)}
-          </Cell>
+          </Col>
         )}
       </Row>)
   }
@@ -77,7 +77,7 @@ export default class SessionDetail extends Component {
     return (
       <div>
         <Row>
-          <Cell>
+          <Col xs={12} sm={12}>
             <h1>{this.state.session.name}</h1>
             <EventClock createEvent={this.props.createEvent}
                         deleteEvent={this.props.deleteEvent}
@@ -86,13 +86,13 @@ export default class SessionDetail extends Component {
                         session={this.state.session}
                         events={this.state.events}
                         currentEvent={this.state.currentEvent}/>
-          </Cell>
+          </Col>
         </Row>
         {this.hasTerminated() ? this.sessionReport() : null}
         <Row>
-          <Cell>
+          <Col xs={12} sm={12}>
             <IndexLink to="/">back</IndexLink>
-          </Cell>
+          </Col>
         </Row>
       </div>
     )

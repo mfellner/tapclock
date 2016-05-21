@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import CSSModules from 'react-css-modules'
 
-import styles from './row.css'
+import styles from './row.scss'
 
 class Row extends Component {
   render() {

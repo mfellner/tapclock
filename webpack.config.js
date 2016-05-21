@@ -14,7 +14,7 @@ module.exports = {
   entry: {
     main: './src/index.jsx',
     vendor: Object.keys(packageJson.dependencies).filter(name => [
-      'normalize.css'
+      'bootstrap'
     ].indexOf(name) === -1)
   },
   output: {
@@ -27,8 +27,13 @@ module.exports = {
         presets: ['es2015-native-modules', 'stage-1', 'react']
       }
     }, {
-      test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style', 'css?minimize&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
+      test: /\.scss$/,
+      loader: ExtractTextPlugin.extract(
+        'style?sourceMap', [
+          // 'css?sourceMap',
+          'css?sourceMap&modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+          'resolve-url',
+          'sass?sourceMap'])
     }, {
       test: /\.(otf|eot|svg|ttf|woff2?)/, loader: 'file'
     }, {

@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { Map } from 'immutable'
 
-import { Row, Cell } from '../components/layout'
+import { Row, Col } from '../components/layout'
 import { createSession, deleteSession } from '../actions/sessions'
 
 function mapStateToProps(state) {
@@ -33,26 +33,26 @@ export default class SessionList extends Component {
     return (
       <div>
         <Row>
-          <Cell>
+          <Col sm={12}>
             {this.props.sessions.valueSeq().map(session => (
               <Row key={session._id}>
-                <Cell>
+                <Col xs={8} sm={6}>
                   <Link to={`/session/${session._id}`}>{session.name}</Link>
-                </Cell>
-                <Cell>
+                </Col>
+                <Col xs={4} sm={6}>
                   <button onClick={this.deleteSession.bind(this, session._id)}>delete</button>
-                </Cell>
+                </Col>
               </Row>
             ))}
-          </Cell>
+          </Col>
         </Row>
         <Row>
-          <Cell>
+          <Col xs={8} sm={6}>
             <button onClick={this.addSession.bind(this)}>add session</button>
-          </Cell>
-          <Cell>
+          </Col>
+          <Col xs={4} sm={6}>
             <Link to="/preferences">Preferences</Link>
-          </Cell>
+          </Col>
         </Row>
       </div>
     )

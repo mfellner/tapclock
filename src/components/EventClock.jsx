@@ -5,7 +5,7 @@ import logger from '../debug'
 import EventList from './EventList.jsx'
 import SessionRecord from '../model/SessionRecord'
 import EventRecord from '../model/EventRecord'
-import { Row, Cell } from '../components/layout'
+import { Row, Col } from '../components/layout'
 
 const log = logger('EventClock')
 
@@ -41,9 +41,9 @@ export default class EventClock extends Component {
       <div>
         <Row>
           {this.props.templates.toIndexedSeq().map(template =>
-            <Cell key={template._id}>{this.createEventButton(template)}</Cell>
+            <Col xs={2} sm={2} md={3} key={template._id}>{this.createEventButton(template)}</Col>
           )}
-          <Cell>{this.endEventsButton()}</Cell>
+          <Col xs={2} sm={2} md={3}>{this.endEventsButton()}</Col>
         </Row>
         <EventList events={this.props.events}
                    deleteEvent={this.props.deleteEvent}

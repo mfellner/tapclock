@@ -33,7 +33,7 @@ function parseState(json) {
     try {
       return recordFromIterable(value)
     } catch (e) {
-      log('No model for state %s: %j', key, value, e)
+      // log('No model for state %s: %j', key, value, e)
       return Iterable.isIndexed(value) ? value.toList() : value.toMap()
     }
   })

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Map } from 'immutable'
 
 import logger from '../debug'
-import { Row, Cell } from '../components/layout'
+import { Row, Col } from '../components/layout'
 import { createTemplate, deleteTemplate } from '../actions/templates'
 
 const log = logger('PreferencesView')
@@ -40,22 +40,22 @@ export default class PreferencesView extends Component {
     return (
       <div>
         <Row>
-          <Cell>
+          <Col xs={12} sm={12}>
             <h1>Preferences</h1>
-          </Cell>
+          </Col>
         </Row>
         {this.props.templates.toIndexedSeq().map(template =>
           <Row key={template._id}>
-            <Cell>
+            <Col xs={4} sm={4}>
               {template.name}
-            </Cell>
-            <Cell>
+            </Col>
+            <Col xs={2} sm={2}>
               <button onClick={this.props.deleteTemplate.bind(this, template._id)}>delete</button>
-            </Cell>
+            </Col>
           </Row>
         )}
         <Row>
-          <Cell>
+          <Col sm={8}>
             <input type="text"
                    value={this.state.templateName}
                    onChange={this.onTemplateNameChanged.bind(this)}/>
@@ -63,10 +63,10 @@ export default class PreferencesView extends Component {
                     onClick={this.onCreateTemplate.bind(this, this.state.templateName)}>
               create event template
             </button>
-          </Cell>
-          <Cell>
+          </Col>
+          <Col sm={4}>
             <IndexLink to="/">back</IndexLink>
-          </Cell>
+          </Col>
         </Row>
       </div>
     )
