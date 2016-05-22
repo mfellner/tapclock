@@ -5,7 +5,7 @@ import logger from '../debug'
 import EventView from './EventView.jsx'
 import EventTimeView from './EventTimeView.jsx'
 import { NowEvent } from '../model/EventRecord'
-import { ListGroup, ListGroupItem, Variables } from '../components/layout'
+import { Row, Col, Table, Variables } from '../components/layout'
 
 const log = logger('EventList')
 
@@ -28,17 +28,30 @@ export default class EventList extends Component {
       : new NowEvent()
 
     return (
-      <ListGroup>
-        {eventKeys.map((key, i, keys) => (
-          <ListGroupItem key={key} lineHeight={Variables.BTN_HEIGHT}>
-            <EventView event={events.get(key)}
-                       deleteEvent={this.props.deleteEvent}
-                       hasTerminated={this.props.hasTerminated}>
-              <EventTimeView start={events.get(key)} end={events.get(keys.get(i + 1), endEvent)}/>
-            </EventView>
-          </ListGroupItem>
-        ))}
-      </ListGroup>
+      <Row>
+        <Col xs={12} sm={12}>
+          <Table small striped>
+            <thead>
+            <tr>
+              <th>event</th>
+              <th>start</th>
+              <th>time</th>
+              <th/>
+            </tr>
+            </thead>
+            <tbody>
+            {eventKeys.map((key, i, keys) => (
+              <EventView key={key}
+                         event={events.get(key)}
+                         deleteEvent={this.props.deleteEvent}
+                         hasTerminated={this.props.hasTerminated}>
+                <EventTimeView start={events.get(key)} end={events.get(keys.get(i + 1), endEvent)}/>
+              </EventView>
+            ))}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
     )
   }
 }

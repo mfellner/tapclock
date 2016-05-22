@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import CSSModules from 'react-css-modules'
 import { Link, IndexLink } from 'react-router'
 
-import styles from './button.scss'
+import styles from './button-group.scss'
 
 function getStyleName(props) {
   const isLink = props.to || props.href

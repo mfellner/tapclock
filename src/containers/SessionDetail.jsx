@@ -63,9 +63,9 @@ export default class SessionDetail extends Component {
     const report = new Report(this.state.session, this.state.events)
     return (
       <Row>
-        <Col sm={2}><b>total:</b> {report.totalTime}</Col>
+        <Col xl={1}><b>total:</b> {report.totalTime}</Col>
         {this.props.templates.toIndexedSeq().map(template =>
-          <Col sm={2} key={template._id}>
+          <Col xl={1} key={template._id}>
             <b>{template.name}:</b> {report.getCumulatedTime(template.custom_type)}
           </Col>
         )}

@@ -54,7 +54,7 @@ export default class EventTimeView extends Component {
 
   render() {
     return (
-      <span>time: {moment(this.state.duration).utc().format('HH:mm:ss')}</span>
+      <span>{moment(this.state.duration).utc().format('HH:mm:ss')}</span>
     )
   }
 }

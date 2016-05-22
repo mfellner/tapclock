@@ -5,7 +5,7 @@ import logger from '../debug'
 import EventList from './EventList.jsx'
 import SessionRecord from '../model/SessionRecord'
 import EventRecord from '../model/EventRecord'
-import { Row, Col, Button } from '../components/layout'
+import { Row, Col, Button, ButtonGroup } from '../components/layout'
 
 const log = logger('EventClock')
 
@@ -27,12 +27,15 @@ export default class EventClock extends Component {
   createEventButton(template) {
     const create = template.eventCreator(this.props.session._id)
     const disabled = this.props.currentEvent.name === template.name || this.hasTerminated()
-    return <Button onClick={this.props.createEvent.bind(this, create)}
+    return <Button key={template._id}
+                   onClick={this.props.createEvent.bind(this, create)}
                    disabled={disabled}>{template.name}</Button>
   }
 
   endEventsButton() {
-    return <Button onClick={this.props.endEvents.bind(this, this.props.session._id)}
+    return <Button bsStyle="warning"
+                   outline={true}
+                   onClick={this.props.endEvents.bind(this, this.props.session._id)}
                    disabled={this.hasTerminated()}>stop</Button>
   }
 
@@ -40,10 +43,14 @@ export default class EventClock extends Component {
     return (
       <div>
         <Row>
-          {this.props.templates.toIndexedSeq().map(template =>
-            <Col xs={2} sm={2} md={3} key={template._id}>{this.createEventButton(template)}</Col>
-          )}
-          <Col xs={2} sm={2} md={3}>{this.endEventsButton()}</Col>
+          <Col xs={12} sm={12}>
+            <ButtonGroup>
+              {this.props.templates.toIndexedSeq().map(template =>
+                this.createEventButton(template)
+              )}
+              {this.endEventsButton()}
+            </ButtonGroup>
+          </Col>
         </Row>
         <EventList events={this.props.events}
                    deleteEvent={this.props.deleteEvent}
