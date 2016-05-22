@@ -23,8 +23,7 @@ export default class EventView extends Component {
         <Col xs={3} sm={3}>start: {this.props.event.time.calendar()}</Col>
         <Col xs={3} sm={3}>{this.props.children}</Col>
         <Col xs={3} sm={4}>
-          <Button bsSize="sm"
-                  pullRight="xs"
+          <Button pullRight="xs"
                   onClick={this.deleteEvent.bind(this)}
                   disabled={this.props.hasTerminated}>delete</Button>
         </Col>

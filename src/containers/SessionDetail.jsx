@@ -89,7 +89,7 @@ export default class SessionDetail extends Component {
         {this.hasTerminated() ? this.sessionReport() : null}
         <Row>
           <Col xs={12} sm={12}>
-            <Button bsSize="sm" to="/">back</Button>
+            <Button to="/">back</Button>
           </Col>
         </Row>
       </div>

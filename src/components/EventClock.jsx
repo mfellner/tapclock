@@ -27,14 +27,12 @@ export default class EventClock extends Component {
   createEventButton(template) {
     const create = template.eventCreator(this.props.session._id)
     const disabled = this.props.currentEvent.name === template.name || this.hasTerminated()
-    return <Button bsSize="sm"
-                   onClick={this.props.createEvent.bind(this, create)}
+    return <Button onClick={this.props.createEvent.bind(this, create)}
                    disabled={disabled}>{template.name}</Button>
   }
 
   endEventsButton() {
-    return <Button bsSize="sm"
-                   onClick={this.props.endEvents.bind(this, this.props.session._id)}
+    return <Button onClick={this.props.endEvents.bind(this, this.props.session._id)}
                    disabled={this.hasTerminated()}>stop</Button>
   }
 

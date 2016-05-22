@@ -3,13 +3,13 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { Map } from 'immutable'
 
-import { Row, Col, Button, ListGroup, ListGroupItem } from '../components/layout'
+import { Row, Col, Button, ListGroup, ListGroupItem, Variables } from '../components/layout'
 import { createSession, deleteSession } from '../actions/sessions'
 
 function mapStateToProps(state) {
   return {
     sessions: state.get('sessions'),
-    events: state.get('events'),
+    events: state.get('events')
   }
 }
 
@@ -37,10 +37,9 @@ export default class SessionList extends Component {
             <ListGroup>
               {this.props.sessions.valueSeq().map(session => (
                 <ListGroupItem key={session._id}
-                               lineHeight="31px">
+                               lineHeight={Variables.BTN_HEIGHT}>
                   <Link to={`/session/${session._id}`}>{session.name}</Link>
-                  <Button bsSize="sm"
-                          pullRight="xs"
+                  <Button pullRight="xs"
                           onClick={this.deleteSession.bind(this, session._id)}>delete</Button>
                 </ListGroupItem>
               ))}
@@ -49,8 +48,8 @@ export default class SessionList extends Component {
         </Row>
         <Row>
           <Col xs={12} sm={12}>
-            <Button bsSize="sm" onClick={this.addSession.bind(this)}>add session</Button>
-            <Button bsSize="sm" to="/preferences">Preferences</Button>
+            <Button onClick={this.addSession.bind(this)}>add session</Button>
+            <Button to="/preferences">Preferences</Button>
           </Col>
         </Row>
       </div>

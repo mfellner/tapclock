@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { Map } from 'immutable'
 
 import logger from '../debug'
-import { Row, Col, Button } from '../components/layout'
+import { Row, Col, Button, ListGroup, ListGroupItem, Variables } from '../components/layout'
 import { createTemplate, deleteTemplate } from '../actions/templates'
+import { clearStore } from '../actions/store'
 
 const log = logger('PreferencesView')
 
@@ -18,7 +19,8 @@ export default class PreferencesView extends Component {
   static propTypes = {
     templates: PropTypes.instanceOf(Map).isRequired,
     createTemplate: PropTypes.func.isRequired,
-    deleteTemplate: PropTypes.func.isRequired
+    deleteTemplate: PropTypes.func.isRequired,
+    clearStore: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -38,27 +40,33 @@ export default class PreferencesView extends Component {
   render() {
     return (
       <div>
-        {this.props.templates.toIndexedSeq().map(template =>
-          <Row key={template._id}>
-            <Col xs={4} sm={4}>
-              {template.name}
-            </Col>
-            <Col xs={2} sm={2}>
-              <Button bsSize="sm" onClick={this.props.deleteTemplate.bind(this, template._id)}>delete</Button>
-            </Col>
-          </Row>
-        )}
+        <Row>
+          <Col xs={12} sm={12}>
+            <ListGroup>
+              {this.props.templates.toIndexedSeq().map(template =>
+                <ListGroupItem key={template._id} lineHeight={Variables.BTN_HEIGHT}>
+                  {template.name}
+                  <Button pullRight="xs"
+                          onClick={this.props.deleteTemplate.bind(this, template._id)}>delete</Button>
+                </ListGroupItem>
+              )}
+            </ListGroup>
+          </Col>
+        </Row>
         <Row>
           <Col sm={12}>
             <input type="text"
                    value={this.state.templateName}
                    onChange={this.onTemplateNameChanged.bind(this)}/>
-            <Button bsSize="sm"
-                    disabled={!this.state.templateName}
+            <Button disabled={!this.state.templateName}
                     onClick={this.onCreateTemplate.bind(this, this.state.templateName)}>
               create event template
             </Button>
-            <Button bsSize="sm" to="/">back</Button>
+            <Button bsStyle="danger"
+                    onClick={this.props.clearStore}>
+              clear store
+            </Button>
+            <Button to="/">back</Button>
           </Col>
         </Row>
       </div>
@@ -66,4 +74,4 @@ export default class PreferencesView extends Component {
   }
 }
 
-export default connect(mapStateToProps, {createTemplate, deleteTemplate})(PreferencesView)
+export default connect(mapStateToProps, {createTemplate, deleteTemplate, clearStore})(PreferencesView)
