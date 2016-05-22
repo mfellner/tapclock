@@ -77,7 +77,6 @@ export default class SessionDetail extends Component {
       <div>
         <Row>
           <Col xs={12} sm={12}>
-            <h1>{this.state.session.name}</h1>
             <EventClock createEvent={this.props.createEvent}
                         deleteEvent={this.props.deleteEvent}
                         endEvents={this.props.endEvents}

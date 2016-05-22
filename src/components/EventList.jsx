@@ -5,7 +5,7 @@ import logger from '../debug'
 import EventView from './EventView.jsx'
 import EventTimeView from './EventTimeView.jsx'
 import { NowEvent } from '../model/EventRecord'
-import { Row, Col } from '../components/layout'
+import { Row, Col, ListGroup, ListGroupItem } from '../components/layout'
 
 const log = logger('EventList')
 
@@ -18,23 +18,21 @@ export default class EventList extends Component {
 
   render() {
     const events = this.props.events
-    const eventKeys = this.props.events.keySeq()
+    const eventKeys = this.props.events.butLast().keySeq()
     const endEvent = this.props.hasTerminated ? events.last() : new NowEvent()
 
     return (
-      <div>
+      <ListGroup>
         {eventKeys.map((key, i, keys) => (
-          <Row key={key}>
-            <Col xs={12} sm={12}>
-              <EventView event={events.get(key)}
-                         deleteEvent={this.props.deleteEvent}
-                         hasTerminated={this.props.hasTerminated}>
-                <EventTimeView start={events.get(key)} end={events.get(keys.get(i + 1), endEvent)}/>
-              </EventView>
-            </Col>
-          </Row>
+          <ListGroupItem key={key} lineHeight="31px">
+            <EventView event={events.get(key)}
+                       deleteEvent={this.props.deleteEvent}
+                       hasTerminated={this.props.hasTerminated}>
+              <EventTimeView start={events.get(key)} end={events.get(keys.get(i + 1), endEvent)}/>
+            </EventView>
+          </ListGroupItem>
         ))}
-      </div>
+      </ListGroup>
     )
   }
 }

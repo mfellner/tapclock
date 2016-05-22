@@ -11,9 +11,13 @@ export default class App extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <Container>
-        <h1>Tap Clock</h1>
+        <h1>
+          Tap Clock&nbsp;
+          <small style={{fontSize: '0.5em'}}>{this.props.location.pathname}</small>
+        </h1>
         {this.props.children}
       </Container>
     )

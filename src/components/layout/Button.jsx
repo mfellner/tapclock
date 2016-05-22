@@ -12,6 +12,7 @@ function getStyleName(props) {
   if (props.block) style += ' btn-block'
   if (props.active) style += ' active'
   if (props.disabled && isLink) style += ' disabled'
+  if (props.pullRight) style += ` pull-${props.pullRight}-right`
   return style
 }
 
@@ -25,7 +26,8 @@ class Button extends Component {
     outline: PropTypes.bool.isRequired,
     block: PropTypes.bool.isRequired,
     active: PropTypes.bool.isRequired,
-    disabled: PropTypes.bool.isRequired
+    disabled: PropTypes.bool.isRequired,
+    pullRight: PropTypes.oneOf([null, 'xs', 'sm', 'md', 'lg', 'xl'])
   }
 
   static defaultProps = {
@@ -36,7 +38,8 @@ class Button extends Component {
     outline: false,
     block: false,
     active: false,
-    disabled: false
+    disabled: false,
+    pullRight: null
   }
 
   constructor(props) {
@@ -49,9 +52,8 @@ class Button extends Component {
   renderReactRouterLink() {
     const Class = this.props.to === '/' ? IndexLink : Link
     return (
-      <Class to={this.props.to}
-             role="button"
-             href={this.props.href}
+      <Class role="button"
+             to={this.props.to}
              styleName={this.state.styleName}>
         {this.props.children}
       </Class>)

@@ -41,7 +41,7 @@ module.exports = {
     }]
   },
   plugins: [
-    new ExtractTextPlugin('styles.min.css', {allChunks: true}),
+    new ExtractTextPlugin('style.min.css', {allChunks: true}),
     new CommonsChunkPlugin({name: 'vendor', filename: 'vendor.min.js'}),
     new webpack.DefinePlugin({
       'USE_HTML5_HISTORY': nconf.get('USE_HTML5_HISTORY'),

@@ -38,11 +38,6 @@ export default class PreferencesView extends Component {
   render() {
     return (
       <div>
-        <Row>
-          <Col xs={12} sm={12}>
-            <h1>Preferences</h1>
-          </Col>
-        </Row>
         {this.props.templates.toIndexedSeq().map(template =>
           <Row key={template._id}>
             <Col xs={4} sm={4}>
@@ -54,7 +49,7 @@ export default class PreferencesView extends Component {
           </Row>
         )}
         <Row>
-          <Col sm={8}>
+          <Col sm={12}>
             <input type="text"
                    value={this.state.templateName}
                    onChange={this.onTemplateNameChanged.bind(this)}/>
@@ -63,8 +58,6 @@ export default class PreferencesView extends Component {
                     onClick={this.onCreateTemplate.bind(this, this.state.templateName)}>
               create event template
             </Button>
-          </Col>
-          <Col sm={4}>
             <Button bsSize="sm" to="/">back</Button>
           </Col>
         </Row>
