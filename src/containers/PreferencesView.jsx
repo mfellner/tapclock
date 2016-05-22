@@ -3,9 +3,15 @@ import { connect } from 'react-redux'
 import { Map } from 'immutable'
 
 import logger from '../debug'
-import { Row, Col, Button, ListGroup, ListGroupItem, Variables } from '../components/layout'
 import { createTemplate, deleteTemplate } from '../actions/templates'
 import { clearStore } from '../actions/store'
+import {
+  Row, Col,
+  Button,
+  ListGroup, ListGroupItem,
+  InputGroup, FormControl,
+  Variables
+} from '../components/layout'
 
 const log = logger('PreferencesView')
 
@@ -54,14 +60,23 @@ export default class PreferencesView extends Component {
           </Col>
         </Row>
         <Row>
-          <Col sm={12}>
-            <input type="text"
-                   value={this.state.templateName}
-                   onChange={this.onTemplateNameChanged.bind(this)}/>
-            <Button disabled={!this.state.templateName}
-                    onClick={this.onCreateTemplate.bind(this, this.state.templateName)}>
-              create event template
-            </Button>
+          <Col xs={12} sm={12}>
+            <InputGroup>
+              <FormControl type="text"
+                           placeholder="template name"
+                           value={this.state.templateName}
+                           onChange={this.onTemplateNameChanged.bind(this)}/>
+              <InputGroup.Button>
+                <Button disabled={!this.state.templateName}
+                        onClick={this.onCreateTemplate.bind(this, this.state.templateName)}>
+                  create event template
+                </Button>
+              </InputGroup.Button>
+            </InputGroup>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} sm={12}>
             <Button bsStyle="danger"
                     onClick={this.props.clearStore}>
               clear store

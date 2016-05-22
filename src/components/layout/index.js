@@ -6,4 +6,6 @@ export { default as Col } from './Col.jsx'
 export { default as Button } from './Button.jsx'
 export { default as ListGroup } from './ListGroup.jsx'
 export { default as ListGroupItem } from './ListGroupItem.jsx'
+export { default as InputGroup } from './InputGroup.jsx'
+export { default as FormControl } from './FormControl.jsx'
 export { variables as Variables }
