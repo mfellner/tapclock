@@ -13,7 +13,7 @@ export default class App extends Component {
   render() {
     return (
       <Container>
-        <h5>
+        <h5 style={{marginTop: '16px', marginBottom: '16px'}}>
           Tap Clock&nbsp;
           <small style={{fontSize: '0.52em'}}>{this.props.location.pathname}</small>
         </h5>

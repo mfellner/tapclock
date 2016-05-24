@@ -13,6 +13,11 @@ function getStyleName(props) {
   if (props.active) style += ' active'
   if (props.disabled && isLink) style += ' disabled'
   if (props.pullRight) style += ` pull-${props.pullRight}-right`
+  if (props.margin) style += ` m-a-${props.margin}`
+  if (props.marginTop) style += ` m-t-${props.marginTop}`
+  if (props.marginRight) style += ` m-r-${props.marginRight}`
+  if (props.marginBottom) style += ` m-b-${props.marginBottom}`
+  if (props.marginLeft) style += ` m-l-${props.marginLeft}`
   return style
 }
 
@@ -27,19 +32,20 @@ class Button extends Component {
     block: PropTypes.bool.isRequired,
     active: PropTypes.bool.isRequired,
     disabled: PropTypes.bool.isRequired,
-    pullRight: PropTypes.oneOf([null, 'xs', 'sm', 'md', 'lg', 'xl'])
+    pullRight: PropTypes.oneOf([null, 'xs', 'sm', 'md', 'lg', 'xl']),
+    margin: PropTypes.number,
+    marginTop: PropTypes.number,
+    marginRight: PropTypes.number,
+    marginBottom: PropTypes.number,
+    marginLeft: PropTypes.number
   }
 
   static defaultProps = {
-    to: null,
-    href: null,
     bsStyle: 'secondary',
-    bsSize: null,
     outline: false,
     block: false,
     active: false,
-    disabled: false,
-    pullRight: null
+    disabled: false
   }
 
   constructor(props) {

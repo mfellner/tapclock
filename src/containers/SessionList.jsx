@@ -48,8 +48,11 @@ export default class SessionList extends Component {
         </Row>
         <Row>
           <Col xs={12} sm={12}>
-            <Button onClick={this.addSession.bind(this)}>add session</Button>
-            <Button to="/preferences">Preferences</Button>
+            <Button bsStyle="primary"
+                    marginTop={1}
+                    marginRight={1}
+                    onClick={this.addSession.bind(this)}>add session</Button>
+            <Button to="/preferences" marginTop={1}>Preferences</Button>
           </Col>
         </Row>
       </div>

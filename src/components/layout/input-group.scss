@@ -10,3 +10,6 @@ $enable-flex: true;
 // Core CSS
 @import "~bootstrap/scss/reboot";
 @import "~bootstrap/scss/forms";
+
+// Utility classes
+@import "~bootstrap/scss/utilities-spacing";

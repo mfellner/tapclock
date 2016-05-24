@@ -61,7 +61,7 @@ export default class PreferencesView extends Component {
         </Row>
         <Row>
           <Col xs={12} sm={12}>
-            <InputGroup>
+            <InputGroup marginTop={1}>
               <FormControl type="text"
                            placeholder="template name"
                            value={this.state.templateName}
@@ -78,10 +78,12 @@ export default class PreferencesView extends Component {
         <Row>
           <Col xs={12} sm={12}>
             <Button bsStyle="danger"
+                    marginTop={1}
+                    marginRight={1}
                     onClick={this.props.clearStore}>
               clear store
             </Button>
-            <Button to="/">back</Button>
+            <Button to="/" marginTop={1}>back</Button>
           </Col>
         </Row>
       </div>

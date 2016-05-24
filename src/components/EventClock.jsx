@@ -44,7 +44,7 @@ export default class EventClock extends Component {
       <div>
         <Row>
           <Col xs={12} sm={12}>
-            <ButtonGroup>
+            <ButtonGroup marginBottom={1}>
               {this.props.templates.toIndexedSeq().map(template =>
                 this.createEventButton(template)
               )}
