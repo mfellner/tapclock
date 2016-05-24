@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import CSSModules from 'react-css-modules'
 import { Link, IndexLink } from 'react-router'
+import { findDOMNode } from 'react-dom'
 
 import styles from './button-group.scss'
 
@@ -49,6 +50,10 @@ class Button extends Component {
     }
   }
 
+  onTouchEnd() {
+    findDOMNode(this.refs.btn).blur()
+  }
+
   renderReactRouterLink() {
     const Class = this.props.to === '/' ? IndexLink : Link
     return (
@@ -62,16 +67,20 @@ class Button extends Component {
   renderElement() {
     return this.props.href
       ? // Render anchor element
-      <a role="button"
+      <a ref="btn"
+         role="button"
          href={this.props.href}
-         styleName={this.state.styleName}>
+         styleName={this.state.styleName}
+         onTouchEnd={this.onTouchEnd.bind(this)}>
         {this.props.children}
       </a>
       : // Render button element
-      <button type="button"
+      <button ref="btn"
+              type="button"
               disabled={this.props.disabled}
               onClick={this.props.onClick}
-              styleName={this.state.styleName}>
+              styleName={this.state.styleName}
+              onTouchEnd={this.onTouchEnd.bind(this)}>
         {this.props.children}
       </button>
   }
